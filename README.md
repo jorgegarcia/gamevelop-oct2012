@@ -6,5 +6,5 @@ Demo code and scripts presented at the Gamevelop event (October 2012) in Madrid.
 
 Jorge Garcia info@jorgegarciamartin.com<br><br>
 
-Todo material adicional incluido es propiedad de los respectivos autores originales.<br>
+Todo el material adicional incluido es propiedad de los respectivos autores originales.<br>
 All additional material and contents included herein are property of their respective owners.<br>
