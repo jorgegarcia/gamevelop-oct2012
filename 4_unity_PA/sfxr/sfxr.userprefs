@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/sfxr/SfxrParams.cs">
+    <Files>
+      <File FileName="Assets/audio_scripts/SfxrUnit.cs" Line="61" Column="4" />
+      <File FileName="Assets/sfxr/Synthesizer.cs" Line="4" Column="1" />
+      <File FileName="Assets/sfxr/SfxrParams.cs" Line="15" Column="25" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

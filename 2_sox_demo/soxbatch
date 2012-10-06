@@ -1,0 +1,78 @@
+#######################################################################
+# 
+#  	Batch processing and format conversion script for SOX 14.4.0
+#	Developed and tested on OSX 10.5.8
+#  
+#  	Jorge Garcia | October 2012
+#  	info@jorgegarciamartin.com
+#
+#######################################################################
+
+import os
+
+# Input files location
+sourceDir	= './source/'
+
+# Output platforms locations
+desktopDir	= './processed_desktop/'
+mobileDir	= './processed_mobile/'
+webDir		= './processed_web/'
+
+soxBin		= './sox-14.4.0/sox'
+
+fileList	= os.listdir(sourceDir)
+numFiles	= len(fileList)
+counter		= 0
+
+
+def LogWithFormat(platform, counter, numFiles, progress, filename):
+	print '\n' + "[" + platform + " " + progress + "%] Source file " + \
+	str(counter) + " of " + str(numFiles) + ": " + filename
+    
+def MakeCall(call): os.system(" ".join(call))
+		
+# http://stackoverflow.com/questions/1392413/
+def GetFolderSize(start_path = '.'):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(start_path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            total_size += os.path.getsize(fp)
+    return total_size
+
+
+for filename in fileList:
+	counter += 1
+	progress = str(int(float(counter) / float(numFiles) * 100.0))
+	
+	# Desktop format
+	call = [soxBin, sourceDir + filename, '-b 16', desktopDir + \
+			filename, 'rate -I 48000', 'dither -s']
+	LogWithFormat("Desktop", counter, numFiles, progress, filename)
+	MakeCall(call)
+	
+	# Mobile format (mp3 44100Hz 16 bit)
+	call = [soxBin, sourceDir + filename, '-b 16', mobileDir + \
+			filename + '.mp3', 'rate -I 44100', 'dither -s']		
+	LogWithFormat("Mobile", counter, numFiles, progress, filename)
+	MakeCall(call)
+			
+	# Web format (ogg) 
+	call = [soxBin, sourceDir + filename, webDir + \
+			filename + '.ogg', 'rate -I 22050', 'dither -s']
+	LogWithFormat("Web", counter, numFiles, progress, filename)
+	MakeCall(call)
+	
+	# Prints source file statistics
+	print "\nORIGINAL FILE STATISTICS"
+	call = [soxBin, sourceDir + filename, '-n stat']
+	os.system(" ".join(call))	
+	print "-------------------------------" 
+
+# General statistics
+print "\nSIZE STATISTICS (bytes)\n"
+print "Source size  : "	+ str(GetFolderSize(sourceDir))
+print "Desktop size : "	+ str(GetFolderSize(desktopDir))
+print "Mobile size  : "	+ str(GetFolderSize(mobileDir))
+print "Web size     : "	+ str(GetFolderSize(webDir))
+	
